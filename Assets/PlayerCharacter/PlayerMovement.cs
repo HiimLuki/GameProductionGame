@@ -7,6 +7,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("General movement related stuff")]
     [Tooltip("Speed at that character moves")]
     public float movementSpeed;
+    [Tooltip("Layer that detects collision for player")]
+    public LayerMask collisionMask;
+    [Tooltip("Collision detection distance")]
+    public float collisionDetectionDistance;
 
     [Header("Gravity related stuff")]
     [Tooltip("Gravity that pulls the character down")]
@@ -38,5 +42,17 @@ public class PlayerMovement : MonoBehaviour
 
         // Apply new position to character
         this.transform.position = Vector3.MoveTowards(this.transform.position, this.targetPosition, this.movementSpeed * Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        // Cast a ray straight down.
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, collisionDetectionDistance, collisionMask);
+
+        // If it hits something...
+        if (hit.collider != null)
+        {
+            Debug.Log("Hit wall: " + hit.collider.gameObject.name);
+        }
     }
 }

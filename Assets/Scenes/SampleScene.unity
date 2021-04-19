@@ -913,6 +913,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  collisionDetectionDistance: 0
   gravity: 0.5
   mass: 0
 --- !u!114 &1591744817
@@ -1238,7 +1242,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1965908484}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e62555679d4da946b2fe86ee64183d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 720b0481d4d836f4fba059e77b937769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1591744815}
