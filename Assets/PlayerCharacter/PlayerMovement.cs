@@ -7,32 +7,18 @@ public class PlayerMovement : MonoBehaviour
     [Header("General movement related stuff")]
     [Tooltip("Speed at that character moves")]
     public float movementSpeed;
-    [Tooltip("Layer that detects collision for player")]
-    public LayerMask collisionMask;
-    [Tooltip("Collision detection distance")]
-    public float collisionDetectionDistance;
-
-    [Header("Gravity related stuff")]
-    [Tooltip("Gravity that pulls the character down")]
-    public float gravity;
-    [Tooltip("Mass of the player character.")]
-    public float mass;
 
     [Header("Character Shrinking")]
     [Tooltip("How much the character should shrink each time ability is used")]
     public float shrinkFactor;
 
     private Vector3 targetPosition;
-
     private Rigidbody2D rb;
-
-    private Vector3 size;
 
     // Start is called before the first frame update
     void Start()
     {
         this.rb = this.GetComponent<Rigidbody2D>();
-        this.size = this.transform.localScale;
         this.targetPosition = this.transform.position;
     }
 
@@ -56,5 +42,9 @@ public class PlayerMovement : MonoBehaviour
                 this.transform.localScale.y - shrinkFactor, 
                 this.transform.localScale.z - shrinkFactor);
         }
+
+        // Apply constant falling velocity
+        if (rb.velocity.y < 0f && Mathf.Abs(rb.velocity.y) > movementSpeed)
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * movementSpeed);
     }
 }
