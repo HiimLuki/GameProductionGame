@@ -284,7 +284,7 @@ MonoBehaviour:
   shrinkFactor: 0.1
   playerWeight: 10
   minimumPlayerWeight: 5
-  minion: {fileID: 0}
+  minion: {fileID: 1910377522177275284, guid: e159d5492b0cad346b451ce4b7a4c876, type: 3}
   minionSplitCounter: 8
 --- !u!114 &1591744817
 MonoBehaviour:
@@ -482,6 +482,14 @@ PrefabInstance:
     - target: {fileID: 6435027555639185293, guid: 3862518f0a681214aa2756c4b1bcca86, type: 3}
       propertyPath: m_Name
       value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435027555929041992, guid: 3862518f0a681214aa2756c4b1bcca86, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435027556482988790, guid: 3862518f0a681214aa2756c4b1bcca86, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3862518f0a681214aa2756c4b1bcca86, type: 3}

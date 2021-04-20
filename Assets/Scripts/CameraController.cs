@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
         else
         {
             //Camera goes faster
-            speed -= 0.001f;
+            speed -= 0.0025f;
             Vector3 targetPos = new Vector3(0, target.position.y + speed, transform.position.z);
             transform.position = targetPos;
         }
