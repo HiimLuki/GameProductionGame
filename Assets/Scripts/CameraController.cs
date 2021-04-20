@@ -5,17 +5,21 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
-    //Look At Variable
+    [Header("Camera Target and Speed")]
+    [Tooltip("Target that needs to be followed, speed of the automatic camera")]
     public Transform target;
-    private float speed = 0.1f;
+    public float speed = 0.1f;
 
-    //Variable to get Velocity
+    [Header("Velocity of the Charakter")]
+    [Tooltip("Gets rigidbody")]
     public Rigidbody2D rb;
 
+    [Header("Procedural Tileset")]
+    [Tooltip("Speed at that character moves")]
     public Transform tile1;
     public Transform tile2;
-
     private float size;
+
 
     public void Start()
     {
@@ -26,7 +30,7 @@ public class CameraController : MonoBehaviour
     public void Update()
     {
  
-        //Make Camera Slower Faster in context to the Playerspeed
+        //Make Camera Slower/Faster in context to the Playerspeed
         if(rb.velocity.y <= -2)
         {
             //Camera goes slower (when free falling)
@@ -47,8 +51,8 @@ public class CameraController : MonoBehaviour
         //Generate new Tile
         if(transform.position.y < tile1.position.y)
         {
-            //tile2.position = new Vector3(tile2.position.x, tile1.position.y - size, tile2.position.z);
-            //SwitchTile();
+            tile2.position = new Vector3(tile2.position.x, tile1.position.y - size, tile2.position.z);
+            SwitchTile();
         }
            
     }
