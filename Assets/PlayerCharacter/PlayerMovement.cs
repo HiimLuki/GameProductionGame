@@ -15,8 +15,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Character Shrinking")]
     [Tooltip("How much the character should shrink each time ability is used")]
     public float shrinkFactor;
-    [Tooltip("How many times the character can shrink itself")]
-    public int shrinkAttempts = 10;
+    [Tooltip("The current weight of the player")]
+    public float playerWeight = 10f;
+    [Tooltip("The minimum weight the player can have. Cannot shrink further at this point")]
+    public float minimumPlayerWeight = 5f;
 
     [Header("Minions")]
     [Tooltip("This should be the minion gameObject prefab")]
@@ -84,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             // If player has not used all shrink attempts shrink player
-            if(this.shrinkAttempts > 0)
+            if(this.playerWeight > minimumPlayerWeight)
             {
                 ShrinkPlayer();
             }
@@ -120,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
         // Every time the player shrinks the terminal velocity y should get lower
         // so the player falls slower the smaller it is
         this.terminalVelocityY -= shrinkFactor;
+        this.playerWeight -= 1f;
         if(this.minion != null)
         {
             InstantiateMinions();

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4791684656648674726}
   m_Layer: 0
   m_Name: PlayerCharacter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,10 +146,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  terminalVelocityY: 2
+  terminalVelocityY: 3
   friction: 10
   shrinkFactor: 0.1
-  shrinkAttempts: 10
+  playerWeight: 10
+  minimumPlayerWeight: 5
   minion: {fileID: 1910377522177275284, guid: e159d5492b0cad346b451ce4b7a4c876, type: 3}
   minionSplitCounter: 8
 --- !u!114 &4791684656648674726
