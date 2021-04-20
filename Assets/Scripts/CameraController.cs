@@ -29,14 +29,14 @@ public class CameraController : MonoBehaviour
         //Make Camera Slower Faster in context to the Playerspeed
         if(rb.velocity.y <= -2)
         {
-            //Camera goes slower
-            speed += 0.001f;
+            //Camera goes slower (when free falling)
+            speed += 0.00005f;
             Vector3 targetPos = new Vector3(0, target.position.y + speed, transform.position.z);
             transform.position = targetPos;
         }
         else
         {
-            //Camera goes faster
+            //Camera goes faster (when hitting an object)
             speed -= 0.0025f;
             Vector3 targetPos = new Vector3(0, target.position.y + speed, transform.position.z);
             transform.position = targetPos;
