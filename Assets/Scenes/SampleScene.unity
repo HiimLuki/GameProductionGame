@@ -1706,6 +1706,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &767981223 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1238193031467925710, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+  m_PrefabInstance: {fileID: 1957362984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &767981226 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1238193031467925709, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+  m_PrefabInstance: {fileID: 1957362984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &901764123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4077451318946271843, guid: be46034a49bfb664d9e1d0967fa7b8d8, type: 3}
@@ -2166,16 +2176,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &1130423569 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 4791684656648674712, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
-  m_PrefabInstance: {fileID: 1957362984}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1130423571 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4791684656648674715, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
-  m_PrefabInstance: {fileID: 1957362984}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1162511965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2887,7 +2887,7 @@ PrefabInstance:
     - target: {fileID: 5110734011677600867, guid: 9e3a399cb1457a24e9eb04f281d8a880, type: 3}
       propertyPath: rb
       value: 
-      objectReference: {fileID: 1130423569}
+      objectReference: {fileID: 767981223}
     - target: {fileID: 5110734011677600867, guid: 9e3a399cb1457a24e9eb04f281d8a880, type: 3}
       propertyPath: tile1
       value: 
@@ -2899,7 +2899,7 @@ PrefabInstance:
     - target: {fileID: 5110734011677600867, guid: 9e3a399cb1457a24e9eb04f281d8a880, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1130423571}
+      objectReference: {fileID: 767981226}
     - target: {fileID: 5110734011677600876, guid: 9e3a399cb1457a24e9eb04f281d8a880, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3407,6 +3407,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1238193031169520300, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238193031467925708, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238193031467925708, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238193031467925709, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238193031467925709, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.529
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238193031467925710, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238193031467925711, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+      propertyPath: m_AlwaysUpdate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238193031467925712, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238193031467925712, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4791684656648674715, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3480,7 +3516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &2056893895
 Rigidbody2D:
   serializedVersion: 4
