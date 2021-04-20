@@ -72,6 +72,16 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private float dashCooldown;
 
+    // Called before Start
+    private void Awake()
+    {
+        for(int i = 0; i < this.transform.childCount; i++)
+        {
+            CharakterPickable charakterPickable = this.transform.GetChild(0).gameObject.AddComponent<CharakterPickable>();
+            charakterPickable.playerMovement = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

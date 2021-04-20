@@ -10,11 +10,11 @@ public class CharakterPickable : MonoBehaviour
     /// <summary>
     /// The player movement component on the player
     /// </summary>
-    private PlayerMovement playerMovement;
+    public PlayerMovement playerMovement;
 
     private void Start()
     {
-        playerMovement = this.GetComponent<PlayerMovement>();    
+
     }
 
     //On Trigger Enter Destroy Pickable and make Charakter bigger
