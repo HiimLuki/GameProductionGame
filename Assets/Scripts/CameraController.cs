@@ -51,8 +51,8 @@ public class CameraController : MonoBehaviour
         //Generate new Tile
         if(transform.position.y < tile1.position.y)
         {
-            tile2.position = new Vector3(tile2.position.x, tile1.position.y - size, tile2.position.z);
-            SwitchTile();
+            //tile2.position = new Vector3(tile2.position.x, tile1.position.y - size, tile2.position.z);
+            //SwitchTile();
         }
            
     }
