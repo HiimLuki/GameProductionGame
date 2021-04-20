@@ -868,6 +868,10 @@ PrefabInstance:
       value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 1238193031169520305, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
+      propertyPath: m_Name
+      value: MiddleBone
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238193031169520305, guid: d403ed018d4bea94c90f5c684a1af4d2, type: 3}
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
@@ -3663,7 +3667,7 @@ MonoBehaviour:
   friction: 2
   dashDuration: 1
   dashForce: 5
-  shrinkFactor: 15
+  shrinkFactor: 0.1
   playerWeight: 10
   minimumPlayerWeight: 5
   minion: {fileID: 1910377522177275284, guid: e159d5492b0cad346b451ce4b7a4c876, type: 3}
