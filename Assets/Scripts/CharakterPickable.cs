@@ -24,6 +24,7 @@ public class CharakterPickable : MonoBehaviour
         {
             Destroy(other.gameObject);
             playerMovement.playerWeight += 1f;
+            playerMovement.currentTerminalGravity += 0.1f;
             transform.localScale = new Vector3 (transform.localScale.x + growingFactor, transform.localScale.y + growingFactor, transform.localScale.z + growingFactor);
         }
     }
