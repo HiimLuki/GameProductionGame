@@ -1013,7 +1013,6 @@ GameObject:
   - component: {fileID: 1591744812}
   - component: {fileID: 1591744816}
   - component: {fileID: 1591744817}
-  - component: {fileID: 1591744818}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -1146,7 +1145,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
+  terminalVelocityY: 0
+  friction: 0
   shrinkFactor: 0.1
+  shrinkAttempts: 10
+  minion: {fileID: 0}
+  minionSplitCounter: 8
 --- !u!114 &1591744817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,19 +1163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ebfde089dcfdf439e151d755e431e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1591744818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591744811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fbe7813e98c7ff4e9e52a0668ac3923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 1591744812}
 --- !u!1 &1618069371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,7 +1479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1591744815}
-  variables: {fileID: 1591744818}
+  rb: {fileID: 1591744812}
 --- !u!1 &2144611791
 GameObject:
   m_ObjectHideFlags: 0
