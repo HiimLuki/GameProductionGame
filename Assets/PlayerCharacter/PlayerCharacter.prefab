@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4791684656648674715}
   - component: {fileID: 4791684656648674714}
-  - component: {fileID: 4791684656648674713}
   - component: {fileID: 4791684656648674712}
   - component: {fileID: 4791684656648674727}
   - component: {fileID: 4791684656648674726}
+  - component: {fileID: 910068702}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,32 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4791684656648674713
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4791684656648674725}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &4791684656648674712
 Rigidbody2D:
   serializedVersion: 4
@@ -126,7 +100,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 20
+  m_AngularDrag: 5
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -146,13 +120,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  terminalVelocityY: 3
+  currentTerminalGravity: 3
   friction: 10
+  dashDuration: 1
+  dashForce: 15
   shrinkFactor: 0.1
   playerWeight: 10
   minimumPlayerWeight: 5
   minion: {fileID: 1910377522177275284, guid: e159d5492b0cad346b451ce4b7a4c876, type: 3}
   minionSplitCounter: 8
+  currentPlayerState: 0
 --- !u!114 &4791684656648674726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +142,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ebfde089dcfdf439e151d755e431e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &910068702
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791684656648674725}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

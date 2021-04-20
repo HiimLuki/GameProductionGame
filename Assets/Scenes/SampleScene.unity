@@ -2221,12 +2221,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  terminalVelocityY: 0
-  friction: 0
+  terminalVelocityY: 3
+  friction: 2
   shrinkFactor: 0.1
   playerWeight: 10
   minimumPlayerWeight: 5
-  minion: {fileID: 0}
+  minion: {fileID: 1910377522177275284, guid: e159d5492b0cad346b451ce4b7a4c876, type: 3}
   minionSplitCounter: 8
 --- !u!114 &1591744817
 MonoBehaviour:
@@ -2783,5 +2783,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5110734011677600867, guid: 9e3a399cb1457a24e9eb04f281d8a880, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9e3a399cb1457a24e9eb04f281d8a880, type: 3}
+--- !u!1 &5110734009850236524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5110734011677600879, guid: 9e3a399cb1457a24e9eb04f281d8a880, type: 3}
+  m_PrefabInstance: {fileID: 5110734009850236523}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5110734009850236525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110734009850236524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720b0481d4d836f4fba059e77b937769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1591744815}
+  rb: {fileID: 1591744812}
+  tile1: {fileID: 1036792321}
+  tile2: {fileID: 1295235312}

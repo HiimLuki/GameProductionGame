@@ -8,9 +8,13 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Speed at that character moves")]
     public float movementSpeed;
     [Tooltip("The maximal value the y-speed can have through gravity")]
-    public float terminalVelocityY;
+    public float currentTerminalGravity;
     [Tooltip("Friction that should be applied to the horizontal speed of the player")]
     public float friction;
+    [Tooltip("Time where no input is possible when using dash")]
+    public float dashDuration;
+    [Tooltip("Force of dash")]
+    public float dashForce = 5f;
 
     [Header("Character Shrinking")]
     [Tooltip("How much the character should shrink each time ability is used")]
@@ -25,6 +29,16 @@ public class PlayerMovement : MonoBehaviour
     public GameObject minion;
     [Tooltip("How many minions are created on each split attempt")]
     public int minionSplitCounter = 8;
+
+    public enum PlayerStates
+    {
+        FALLING,
+        MOVING,
+        DASHING
+    }
+    [Header("Player States")]
+    [Tooltip("The current movement state of the player")]
+    public PlayerStates currentPlayerState;
 
     /// <summary>
     /// Vector that is used to calculate new velocity to apply to rigidbody
@@ -43,6 +57,20 @@ public class PlayerMovement : MonoBehaviour
     /// Rigidbody of the player character
     /// </summary>
     private Rigidbody2D rb;
+    /// <summary>
+    /// Value to set max drag (-> max gravity) for player
+    /// Is related to terminalGravity and should be equal terminal
+    /// gravity except in specific situations
+    /// </summary>
+    private float terminalVelocityY;
+    /// <summary>
+    /// This vector uses mousePosition to create a vector in which direction player can dash to
+    /// </summary>
+    private Vector3 dashVector;
+    /// <summary>
+    /// For counting dashDuration
+    /// </summary>
+    private float dashCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -51,65 +79,105 @@ public class PlayerMovement : MonoBehaviour
         this.targetVelocity = this.rb.velocity;
         this.mousePosition = this.transform.position;
         this.horizontalSpeed = 0f;
+        this.dashCooldown = 0f;
+        terminalVelocityY = this.currentTerminalGravity;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // By default x velocity of player should be taken from its rigidbody
-        this.horizontalSpeed = rb.velocity.x;
-
-        // Player can move character with mouse
-        if (Input.GetMouseButton(0))
+        // If player is in dashing state wait until duration of
+        // dash is over before proceeding with normal movement caluclation
+        if (this.currentPlayerState == PlayerStates.DASHING)
         {
-            this.mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if(this.transform.position.x < this.mousePosition.x)
+            if (dashDuration > dashCooldown)
             {
-                this.horizontalSpeed = 1 * movementSpeed;
+                dashCooldown += 1f * Time.deltaTime;
+            } else
+            {
+                dashCooldown = 0f;
+                this.terminalVelocityY = currentTerminalGravity;
+                this.currentPlayerState = PlayerStates.FALLING;
             }
-            if(this.transform.position.x > this.mousePosition.x)
+        }
+
+        // Character can only move when not in DASHING state
+        if(this.currentPlayerState != PlayerStates.DASHING)
+        {
+            // After dash cooldown calculation init frame like normal
+            InitFrame();
+
+            // Pressing F slows character and we can dash in a direction
+            if (Input.GetKey(KeyCode.F))
             {
+                this.terminalVelocityY = 0.1f;
+                dashVector = this.mousePosition;
+            }
+            if (Input.GetKeyUp(KeyCode.F))
+            {
+                // Character is in Dash mode
+                this.currentPlayerState = PlayerStates.DASHING;
+                rb.AddForce(dashVector * dashForce, ForceMode2D.Impulse);
+                return;
+            }
+
+            // Player can move character with mouse
+            if (Input.GetMouseButton(0))
+            {
+                // TODO: Should player only be in movement mode when 
+                // player interaction is present or when horizontal movementSpeed != 0?
+                this.currentPlayerState = PlayerStates.MOVING;
+                if (this.transform.position.x < this.mousePosition.x)
+                {
+                    this.horizontalSpeed = 1 * movementSpeed;
+                }
+                if (this.transform.position.x > this.mousePosition.x)
+                {
+                    this.horizontalSpeed = -1 * movementSpeed;
+                }
+            }
+            // Player can also move character with A & D
+            if (Input.GetKey(KeyCode.A))
+            {
+                this.currentPlayerState = PlayerStates.MOVING;
                 this.horizontalSpeed = -1 * movementSpeed;
             }
-        }
-        // Player can also move character with A & D
-        if(Input.GetKey(KeyCode.A))
-        {
-            this.horizontalSpeed = -1 * movementSpeed;
-        }
-        if(Input.GetKey(KeyCode.D))
-        {
-            this.horizontalSpeed = 1 * movementSpeed;
-        }
-
-        // Shrink player on button press
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            // If player has not used all shrink attempts shrink player
-            if(this.playerWeight > minimumPlayerWeight)
+            if (Input.GetKey(KeyCode.D))
             {
-                ShrinkPlayer();
+                this.currentPlayerState = PlayerStates.MOVING;
+                this.horizontalSpeed = 1 * movementSpeed;
             }
+
+            // Shrink player on button press
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                // If player is still above allowed minimum weight, it can shrink further
+                if (this.playerWeight > minimumPlayerWeight)
+                {
+                    ShrinkPlayer();
+                }
+            }
+
+            // Apply constant falling velocity
+            // Calculating terminal velocity by adjusting drag of rigidbody
+            this.rb.drag = GetDragFromAcceleration(Physics.gravity.magnitude, terminalVelocityY);
+
+            // Apply friction
+            if (this.horizontalSpeed > 0)
+            {
+                this.horizontalSpeed -= this.friction * Time.deltaTime;
+            }
+            else if (this.horizontalSpeed < 0)
+            {
+                this.horizontalSpeed += this.friction * Time.deltaTime;
+            }
+
+            // Apply horizontal movement speed if applicable
+            this.targetVelocity = new Vector2(this.horizontalSpeed, this.rb.velocity.y);
+
+            // Apply velocity to rigidbody
+            this.rb.velocity = this.targetVelocity;
         }
-
-        // Apply constant falling velocity
-        // Calculating terminal velocity by adjusting drag of rigidbody
-        this.rb.drag = GetDragFromAcceleration(Physics.gravity.magnitude, terminalVelocityY);
-
-        // Apply friction
-        if(this.horizontalSpeed > 0)
-        {
-            this.horizontalSpeed -= this.friction * Time.deltaTime;
-        } else if(this.horizontalSpeed < 0)
-        {
-            this.horizontalSpeed += this.friction * Time.deltaTime;
-        }
-
-        // Apply horizontal movement speed if applicable
-        this.targetVelocity = new Vector2(this.horizontalSpeed, this.rb.velocity.y);
-
-        // Apply velocity to rigidbody
-        this.rb.velocity = this.targetVelocity;
     }
 
 
@@ -137,6 +205,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// All values that need to be set at the beginning of every frame 
+    /// should be set in here
+    /// </summary>
+    private void InitFrame()
+    {
+        // By default x velocity of player should be taken from its rigidbody
+        this.horizontalSpeed = rb.velocity.x;
+        // By default terminal velocity is equal current terminal gravity
+        this.terminalVelocityY = currentTerminalGravity;
+        // Mouse position is needed every frame
+        this.mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // By default character is in falling state every frame
+        this.currentPlayerState = PlayerStates.FALLING;
+    }
 
     /// <summary>
     /// Helper function to get calculate dragging from two floats
